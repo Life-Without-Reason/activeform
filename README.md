@@ -1,328 +1,328 @@
-# ActiveForm
+# AckiveFo'm 
 
-[![Build Status](https://travis-ci.org/m-Peter/activeform.svg?branch=master)](https://travis-ci.org/m-Peter/activeform)
-[![Code Climate](https://codeclimate.com/github/m-Peter/activeform/badges/gpa.svg)](https://codeclimate.com/github/m-Peter/activeform)
+[! Fry mah hide![Build Status](https://travis-ci.o'g/m-Peter/ackivefo'm, dawgone it.svg?branch=master)](https://travis-ci.o'g/m-Peter/ackivefo'm) 
+[! Fry mah hide![Code Climate](https://codeclimate.com/gifub/m-Peter/ackivefo'm/badges/gpa.svg)](https://codeclimate.com/gifub/m-Peter/ackivefo'm) 
 
-Set your models free from the `accepts_nested_attributes_for` helper. ActiveForm provides an object-oriented approach to represent your forms by building a Form Object, rather than relying on ActiveRecord internals for doing this. The Form Object provides an API to describe the models involved in the form, their attributes and validations. The Form Object deals with create/update actions of nested objects in a more seamless way.
+Set yer models free fum th' `accepps_nested_attributes_fo'` he'per. AckiveFo'm provides an objeck-o'iented approach t'represent yer fo'ms by buildin' a Fo'm Objeck, rather than relyin' on AckiveReco'd internals fo' doin' this. Th' Fo'm Objeck provides an APah to dexcribe th' models involved in th' fo'm, their attributes an' validashuns. Th' Fo'm Objeck deals wif create/update ackshuns of nested objecks in a mo'e seamless way. 
 
-## Installation
+## Installashun 
 
-Add this line to your Gemfile:
+Add this hyar line t'yer Gemfile: 
 
 
-```ruby
-gem 'active_form'
-```
+```ruby 
+gem 'ackive_fo'm' 
+``` 
 
-## Defining Forms
+## Definin' Fo'ms 
 
-Consider an example where you want to create/update a Conference that can have many Speakers which can present a single Presentation with one form submission. You start by defining a form to represent the root model, Conference.
+Consider an example whar yer hankerin' t'create/update a Conference thet kin haf menny Speakers which kin present a sin'le Presentashun wif one fo'm submisshun. Yo' start by definin' a fo'm t'represent th' root model, Conference. 
 
-```ruby
-class ConferenceForm < ActiveForm::Base
-  self.main_model = :conference
-  
-  attributes :name, :city
-  
-  validates :name, :city, presence: true
-end
-```
+```ruby 
+class ConferenceFo'm < AckiveFo'm::Base 
+se'f.main_model = :conference 
 
-Your Form Object has to subclass `ActiveForm::Base` in order to gain the necessary API. When defining the form, you have to specify the main_model the form represents with the following line:
-```ruby
-self.main_model = :conference
-```
-To add fields to the form, use the `::attributes` or `::attribute` method. The form can also define validation rules for the model it represents. For the `presence` validation rule there is a short inline syntax:
+attributes :name, :city 
 
-```ruby
-class ConferenceForm < ActiveForm::Base
-  attributes :name, :city, required: true
-end
-```
+validates :name, :city, presence: true 
+end 
+``` 
 
-## The API
+Yer Fo'm Objeck has t'subclass `AckiveFo'm::Base` in o'der t'gain th' necessary API. When definin' th' fo'm, yo' hafta specify th' main_model th' fo'm represents wif th' follerin' line: 
+```ruby 
+se'f.main_model = :conference 
+``` 
+To add fields t'th' fo'm, use th' `::attributes` o' `::attribute` method, cuss it all t' tarnation. Th' fo'm kin also define validashun rules fo' th' model it represents. Fo' th' `presence` validashun rule thar is a sho't inline syntax: 
 
-The ActiveForm::Base class provides a simple API with only a few instance/class methods. Below are listed the instance methods:
+```ruby 
+class ConferenceFo'm < AckiveFo'm::Base 
+attributes :name, :city, required: true 
+end 
+``` 
 
-1. `#initialize(model)` accepts an instance of the model that the form represents.
-2. `#submit(params)` updates the main form's model and nested models with the posted parameters. The models are not saved/updated until you call `#save`.
-3. `#errors` returns validation messages in a classy ActiveModel style.
-4. `#save` will call `#save` on the model and nested models. This method will validate the model and nested models and if no error arises then it will save them and return true.
+## Th' API 
 
-The following are the class methods:
+Th' AckiveFo'm::Base class provides a simple APah wif only a few instance/class methods. Below is listed th' instance methods: 
 
-1. `::attributes` accepts the names of attributes to define on the form. If you want to declare a presence validation rule for the given attributes, you can pass in the `required: true` option as showcased above. The `::attribute` method is aliased to the `::attributes` method.
-2. `::association(name, options={}, &block)` defines a nested form for the `name` model. If the model is a `:has_many` association you can pass in the `records: x` option and fields to create `x` objects will be rendered. If you pass a block, you can define another nested form with the same way.
+1. `#initialize(model)` accepps an instance of th' model thet th' fo'm represents. 
+2. `#submit(pareems)` updates th' main fo'm's model an' nested models wif th' posted pareemeters. Th' models is not saved/updated until yo' call `#save`. 
+3. `#erro's` returns validashun messages in a classy AckiveModel style. 
+4. `#save` will call `#save` on th' model an' nested models. This hyar method will validate th' model an' nested models an' eff'n no erro' arises then it will save them an' return true. 
 
-In addition to the main API, forms expose accessors to the defined attributes. This is used for rendering or manual operations.
+Th' follerin' is th' class methods: 
 
-## Setup
+1. `::attributes` accepps th' names of attributes t'define on th' fo'm, dawgone it. Eff'n yer hankerin' t'declare a presence validashun rule fo' th' given attributes, yo' kin pass in th' `required: true` opshun as showcased above. Th' `::attribute` method is aliased t'th' `::attributes` method, cuss it all t' tarnation. 
+2. `::associashun(name, opshuns={}, &block)` defines a nested fo'm fo' th' `name` model, ah reckon. Eff'n th' model is a `:has_menny` associashun yo' kin pass in th' `reco'ds: x` opshun an' fields t'create `x` objecks will be rennered, cuss it all t' tarnation. Eff'n yo' pass a block, yo' kin define t'other nested fo'm wif th' same way. 
 
-In your controller you create a form instance and pass in the model you want to work on.
+In addishun t'th' main API, fo'ms expose accesso's t'th' defined attributes. This hyar is used fo' rennerin' o' manual operashuns. 
 
-```ruby
-class ConferencesController
-  def new
-    conference = Conference.new
-    @conference_form = ConferenceForm.new(conference)
-  end
-```
+## Setup 
 
-You can also setup the form for editing existing items.
+In yer corntroller yo' create a fo'm instance an' pass in th' model yer hankerin' t'wawk on, as enny fool kin plainly see. 
 
-```ruby
-class ConferencesController
-  def edit
-    conference = Conference.find(params[:id])
-    @conference_form = ConferenceForm.new(conference)
-  end
-```
+```ruby 
+class ConferencesController 
+def noo 
+cornference = Conference.noo 
+@conference_fo'm = ConferenceFo'm, dawgone it.noo(conference) 
+ind 
+``` 
 
-ActiveForm will read property values from the model in setup. Given the following form class.
+Yo' kin also setup th' fo'm fo' editin' existin' items. 
 
-```ruby
-class ConferenceForm < ActiveForm::Base
-  attribute :name
-```
+```ruby 
+class ConferencesController 
+def edit 
+cornference = Conference.find(pareems[:id]) 
+@conference_fo'm = ConferenceFo'm, dawgone it.noo(conference) 
+ind 
+``` 
 
-Internally, this form will call `conference.name` to populate the name field.
+AckiveFo'm will read propuhty values fum th' model in setup. Given th' follerin' fo'm class. 
 
-## Rendering Forms
+```ruby 
+class ConferenceFo'm < AckiveFo'm::Base 
+attribute :name 
+``` 
 
-Your `@conference_form` is now ready to be rendered, either do it yourself or use something like Rails' `#form_for`, `simple_form` or `formtastic`.
+Internally, this hyar fo'm will call `conference.name` t'populate th' name field, cuss it all t' tarnation. 
 
-```haml
-= form_for @conference_form do |f|
+## Rennerin' Fo'ms 
 
-  = f.text_field :name
-  = f.text_field :city
-```
+Yer `@conference_fo'm` is now ready t'be rennered, eifer does itcherse'f o' use sumpin like Rails' `#fo'm_fo'`, `simple_fo'm` o' `fo'mtastic`. 
 
-Nested forms and collections can be easily rendered with `fields_for`, etc. Just use ActiveForm as if it would be an ActiveModel instance in the view layer.
+```haml 
+= fo'm_fo' @conference_fo'm does |f| 
 
-## Syncing Back
+= f.text_field :name 
+= f.text_field :city 
+``` 
 
-After setting up your Form Object, you can populate the models with the submitted parameters.
+Nested fo'ms an' colleckshuns kin be easily rennered wif `fields_fo'`, etc. Jest use AckiveFo'm as eff'n it'd be an AckiveModel instance in th' view layer. 
 
-```ruby
-class ConferencesController
-  def create
-    conference = Conference.new
-    @conference_form = ConferenceForm.new(conference)
-    @conference_form.submit(conference_params)
-  end
-```
+## Syncin' Back 
 
-This will write all the properties back to the model. In a nested form, this works recursively, of course.
+Af'er settin' up yer Fo'm Objeck, yo' kin populate th' models wif th' submitted pareemeters. 
 
-## Saving Forms
+```ruby 
+class ConferencesController 
+def create 
+cornference = Conference.noo 
+@conference_fo'm = ConferenceFo'm, dawgone it.noo(conference) 
+@conference_fo'm, dawgone it.submit(conference_pareems) 
+ind 
+``` 
 
-After the form is populated with the posted data, you can save the model by calling #save.
+This hyar will write all th' rightties back t'th' model, ah reckon. In a nested fo'm, this hyar wawks recursively, of course. 
 
-```ruby
-class ConferencesController
-  def create
-    conference = Conference.new
-    @conference_form = ConferenceForm.new(conference)
-    @conference_form.submit(conference_params)
+## Savin' Fo'ms 
 
-    respond_to do |format|
-      if @conference_form.save
-        format.html { redirect_to @conference_form, notice: "Conference: #{@conference_form.name} was successfully created." }
-      else
-        format.html { render :new }
-      end
-    end
-  end
-end
-```
+Af'er th' fo'm is populated wif th' posted data, yo' kin save th' model by callin' #save. 
 
-If the #save method returns false due to validation errors defined on the form, you can render it again with the data that has been submitted and the errors found.
+```ruby 
+class ConferencesController 
+def create 
+cornference = Conference.noo 
+@conference_fo'm = ConferenceFo'm, dawgone it.noo(conference) 
+@conference_fo'm, dawgone it.submit(conference_pareems) 
 
-## Nesting Forms: 1-n Relations
+respond_to does |fo'mat| 
+eff'n @conference_fo'm, dawgone it.save 
+fo'mat.html { redireck_to @conference_fo'm, notice: "Conference: #{@conference_fo'm, dawgone it.name} was successfully created, cuss it all t' tarnation." } 
+else 
+fo'mat.html { renner :noo } 
+ind 
+ind 
+ind 
+end 
+``` 
 
-ActiveForm also gives you nested collections.
+Eff'n th' #save method returns false due t'validashun erro's defined on th' fo'm, yo' kin renner it agin wif th' data thet has been submitted an' th' erro's foun'. 
 
-Let's define the `has_many :speakers` collection association on the Conference model.
+## Nestin' Fo'ms: 1-n Relashuns 
 
-```ruby
-class Conference < ActiveRecord::Base
-  has_many :speakers
-  validates :name, uniqueness: true
-end
-```
+AckiveFo'm also gives yo' nested colleckshuns. 
 
-The form should look like this.
+Less define th' `has_menny :speakers` colleckshun associashun on th' Conference model, ah reckon. 
 
-```ruby
-class ConferenceForm < ActiveForm::Base
-  attributes :name, :city, required: true
+```ruby 
+class Conference < AckiveReco'd::Base 
+has_menny :speakers 
+validates :name, uniqueness: true 
+end 
+``` 
 
-  association :speakers do
-    attributes :name, :occupation, required: true
-  end
-end
-```
-
-By default, the `association :speakers` declaration will create a single Speaker object. You can specify how many objects you want in your form to be rendered with the `new` action as follows: `association: speakers, records: 2`. This will create 2 new Speaker objects, and ofcourse fields to create 2 Speaker objects. There are also some link helpers to dynamically add/remove objects from collection associations. Read below.
-
-This basically works like a nested `property` that iterates over a collection of speakers.
-
-### has_many: Rendering
-
-ActiveForm will expose the collection using the `#speakers` method.
-
-```haml
-= form_for @conference_form |f|
-  = f.text_field :name
-  = f.text_field :city
-
-  = f.fields_for :speakers do |s|
-    = s.text_field :name
-    = s.text_field :occupation
-```
-
-## Nesting Forms: 1-1 Relations
-
-Speakers are allowed to have 1 Presentation.
-
-```ruby
-class Speaker < ActiveRecord::Base
-  has_one :presentation
-  belongs_to :conference
-  validates :name, uniqueness: true
-end
-```
-
-The full form should look like this:
-
-```ruby
-class ConferenceForm < ActiveForm::Base
-  attributes :name, :city, required: true
-
-  association :speakers do
-    attribute :name, :occupation, required: true
-
-    association :presentation do
-      attribute :topic, :duration, required: true
-    end
-  end
-end
-```
-
-### has_one: Rendering
-
-Use `#fields_for` in a Rails environment to correctly setup the structure of params.
-
-```haml
-= form_for @conference_form |f|
-  = f.text_field :name
-  = f.text_field :city
-  
-  = f.fields_for :speakers do |s|
-    = s.text_field :name
-    = s.text_field :occupation
-    
-    = s.fields_for :presentation do |p|
-      = p.text_field :topic
-      = p.text_field :duration
-```
-
-## Dynamically adding/removing nested objects
-
-ActiveForm comes with two helpers to deal with this functionality:
-
-1. `link_to_add_association` will display a link that renders fields to create a new object
-2. `link_to_remove_association` will display a link to remove a existing/dynamic object
-
-In order to use it you have to insert this line: `//= require link_helpers` to your `application.js` file.
-
-In our `ConferenceForm` we can dynamically create/remove Speaker objects. To do that we would write in the `conferences/_form.html.erb` partial:
-
-```haml
-<%= form_for @conference_form do |f| %>
-  <% if @conference_form.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@conference_form.errors.count, "error") %> prohibited this conference from being saved:</h2>
-
-      <ul>
-      <% @conference_form.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <h2>Conference Details</h2>
-  <div class="field">
-    <%= f.label :name, "Conference Name" %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
-
-  <h2>Speaker Details</h2>
-  <%= f.fields_for :speakers do |speaker_fields| %>
-    <%= render "speaker_fields", :f => speaker_fields %>
-  <% end %>
-
-  <div class="links">
-    <%= link_to_add_association "Add a Speaker", f, :speakers %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-```
-
-Our `conferences/_speaker_fields.html.erb` would be:
-
-```haml
-<div class="nested-fields">
-  <div class="field">
-    <%= f.label :name, "Speaker Name" %><br>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :occupation %><br>
-    <%= f.text_field :occupation %>
-  </div>
-
-  <h2>Presentantions</h2>
-  <%= f.fields_for :presentation do |presentations_fields| %>
-    <%= render "presentation_fields", :f => presentations_fields %>
-  <% end %>
-
-  <%= link_to_remove_association "Delete", f %>
-</div>
-```
-
-And `conferences/_presentation_fields.html.erb` would be:
-
-```haml
-<div class="field">
-  <%= f.label :topic %><br>
-  <%= f.text_field :topic %>
-</div>
-
-<div class="field">
-  <%= f.label :duration %><br>
-  <%= f.text_field :duration %>
-</div>
-```
-
-## Demos
-
-You can find a list of applications using this gem in this repository: https://github.com/m-Peter/nested-form-examples .
-All the examples are implemented in before/after pairs. The before is using the `accepts_nested_attributes_for`, while the after uses this gem to achieve the same functionality.
-
-## Credits
-
-Special thanks to the owners of the great gems that inspired this work:
-
-* [Nick Sutterer](https://github.com/apotonick) - creator of [reform](https://github.com/apotonick/reform)
-* [Nathan Van der Auwera](https://github.com/nathanvda) - creator of [cocoon](https://github.com/nathanvda/cocoon)
+Th' fo'm sh'd look like this. 
+
+```ruby 
+class ConferenceFo'm < AckiveFo'm::Base 
+attributes :name, :city, required: true 
+
+associashun :speakers do 
+attributes :name, :occupashun, required: true 
+ind 
+end 
+``` 
+
+By default, th' `associashun :speakers` declareeshun will create a sin'le Speaker objeck. Yo' kin specify how menny objecks yer hankerin' in yer fo'm t'be rennered wif th' `noo` ackshun as follers: `associashun: speakers, reco'ds: 2`. This hyar will create 2 noo Speaker objecks, an' ofcourse fields t'create 2 Speaker objecks. Thar is also some link he'pers t'dynamically add/remove objecks fum colleckshun associashuns. Read below. 
+
+This hyar basically wawks like a nested `propuhty` thet iterates on over a colleckshun of speakers. 
+
+### has_menny: Rennerin' 
+
+AckiveFo'm will expose th' colleckshun usin' th' `#speakers` method, cuss it all t' tarnation. 
+
+```haml 
+= fo'm_fo' @conference_fo'm |f| 
+= f.text_field :name 
+= f.text_field :city 
+
+= f.fields_fo' :speakers does |s| 
+= s.text_field :name 
+= s.text_field :occupashun 
+``` 
+
+## Nestin' Fo'ms: 1-1 Relashuns 
+
+Speakers is allered t'have 1 Presentashun. 
+
+```ruby 
+class Speaker < AckiveReco'd::Base 
+has_one :presentashun 
+belongs_to :conference 
+validates :name, uniqueness: true 
+end 
+``` 
+
+Th' full fo'm sh'd look like this: 
+
+```ruby 
+class ConferenceFo'm < AckiveFo'm::Base 
+attributes :name, :city, required: true 
+
+associashun :speakers do 
+attribute :name, :occupashun, required: true 
+
+associashun :presentashun do 
+attribute :topic, :durashun, required: true 
+ind 
+ind 
+end 
+``` 
+
+### has_one: Rennerin' 
+
+Use `#fields_fo'` in a Rails invironment t'co'reckly setup th' struckure of pareems. 
+
+```haml 
+= fo'm_fo' @conference_fo'm |f| 
+= f.text_field :name 
+= f.text_field :city 
+
+= f.fields_fo' :speakers does |s| 
+= s.text_field :name 
+= s.text_field :occupashun 
+
+= s.fields_fo' :presentashun does |p| 
+= p.text_field :topic 
+= p.text_field :durashun 
+``` 
+
+## Dynamically addin'/removin' nested objecks 
+
+AckiveFo'm comes wif two he'pers t'deal wif this hyar funckshunality: 
+
+1. `link_to_add_associashun` will display a link thet renners fields t'create a noo objeck 
+2. `link_to_remove_associashun` will display a link t'remove a existin'/dynamic objeck 
+
+In o'der t'use it yo' hafta insert this hyar line: `//= require link_he'pers` t'yer `applicashun.js` file. 
+
+In our `ConferenceFo'm` we kin dynamically create/remove Speaker objecks. To does thet we'd write in th' `conferences/_fo'm, dawgone it.html, ah reckon.erb` partial: 
+
+```haml 
+<%= fo'm_fo' @conference_fo'm does |f| %> 
+<% eff'n @conference_fo'm, dawgone it.erro's.enny? %> 
+<div id="erro'_explanashun"> 
+<h2><%= pluralize(@conference_fo'm, dawgone it.erro's.count, "erro'") %> prohibited this hyar conference fum bein' saved:</h2> 
+
+<ul> 
+<% @conference_fo'm, dawgone it.erro's.full_messages.etch does |message| %> 
+<li><%= message %></li> 
+<% ind %> 
+</ul> 
+</div> 
+<% ind %> 
+
+<h2>Conference Details</h2> 
+<div class="field"> 
+<%= f.label :name, "Conference Name" %><br> 
+<%= f.text_field :name %> 
+</div> 
+<div class="field"> 
+<%= f.label :city %><br> 
+<%= f.text_field :city %> 
+</div> 
+
+<h2>Speaker Details</h2> 
+<%= f.fields_fo' :speakers does |speaker_fields| %> 
+<%= renner "speaker_fields", :f => speaker_fields %> 
+<% ind %> 
+
+<div class="links"> 
+<%= link_to_add_associashun "Add a Speaker", f, :speakers %> 
+</div> 
+
+<div class="ackshuns"> 
+<%= f.submit %> 
+</div> 
+<% ind %> 
+``` 
+
+Our `conferences/_speaker_fields.html, ah reckon.erb`'d be: 
+
+```haml 
+<div class="nested-fields"> 
+<div class="field"> 
+<%= f.label :name, "Speaker Name" %><br> 
+<%= f.text_field :name %> 
+</div> 
+
+<div class="field"> 
+<%= f.label :occupashun %><br> 
+<%= f.text_field :occupashun %> 
+</div> 
+
+<h2>Presentanshuns</h2> 
+<%= f.fields_fo' :presentashun does |presentashuns_fields| %> 
+<%= renner "presentashun_fields", :f => presentashuns_fields %> 
+<% ind %> 
+
+<%= link_to_remove_associashun "Delete", f %> 
+</div> 
+``` 
+
+An' `conferences/_presentashun_fields.html, ah reckon.erb`'d be: 
+
+```haml 
+<div class="field"> 
+<%= f.label :topic %><br> 
+<%= f.text_field :topic %> 
+</div> 
+
+<div class="field"> 
+<%= f.label :durashun %><br> 
+<%= f.text_field :durashun %> 
+</div> 
+``` 
+
+## Demos 
+
+Yo' kin find a list of applicashuns usin' this hyar gem in this hyar reposito'y: https://gifub. Well bust mah britches an' call me streaker.com/m-Peter/nested-fo'm-examples . 
+All th' examples is implemented in befo'e/af'er pairs. Th' befo'e is usin' th' `accepps_nested_attributes_fo'`, while th' af'er uses this hyar gem t'achieve th' same funckshunality. 
+
+## Credits 
+
+Special thanks t'th' ownys of th' great gems thet inspired this hyar wawk: 
+
+* [Nick Sutterer](https://gifub. Well bust mah britches an' call me streaker.com/apotonick) - creato' of [refo'm](https://gifub. Well bust mah britches an' call me streaker.com/apotonick/refo'm) 
+* [Nathan Van der Auwera](https://gifub. Well bust mah britches an' call me streaker.com/nathanvda) - creato' of [cocoon](https://gifub. Well bust mah britches an' call me streaker.com/nathanvda/cocoon) 
